@@ -1,23 +1,20 @@
+import { Pagina2Page } from './../pagina2/pagina2';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
-/**
- * Generated class for the PrincipalPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @Component({
   selector: 'page-principal',
   templateUrl: 'principal.html',
 })
 export class PrincipalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  pagina2: any = Pagina2Page;
+
+  constructor(public navCtrl: NavController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PrincipalPage');
+  public navegarPagina(){
+    this.navCtrl.push(Pagina2Page);
   }
 
 }
