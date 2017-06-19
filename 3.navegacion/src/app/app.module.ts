@@ -15,7 +15,9 @@ import {TabsPage, Pagina3Page, Pagina2Page,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      backButtonText: 'Atrás'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
