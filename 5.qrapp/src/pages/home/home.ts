@@ -15,13 +15,16 @@ export class HomePage {
 
   public scan(){
     if (!this.platform.is('cordova')){
-       this.historialProvider.agregarHistorial('http://www.google.es');
+       //let cadena:string = 'http://www.google.es';
+       let cadena:string = 'geo:43.2630126,-2.9349852000000283';
+       this.historialProvider.agregarHistorial(cadena);
        return;
     }
     
     this.scanner.scan().then((barcodeData) => {
       if (!barcodeData.cancelled && barcodeData.text != null){
         this.historialProvider.agregarHistorial(barcodeData.text);
+        console.log(barcodeData.text);
       }
     }, (err) => {
       console.error(err);
