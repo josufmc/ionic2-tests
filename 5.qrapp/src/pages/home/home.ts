@@ -16,9 +16,20 @@ export class HomePage {
   public scan(){
     if (!this.platform.is('cordova')){
        //let cadena:string = 'http://www.google.es';
-       let cadena:string = 'geo:43.2630126,-2.9349852000000283';
-       this.historialProvider.agregarHistorial(cadena);
-       return;
+       //let cadena:string = 'geo:43.2630126,-2.9349852000000283';
+       /*let cadena:string = `BEGIN:VCARD
+VERSION:2.1
+N:Kent;Clark
+FN:Clark Kent
+ORG:
+TEL;HOME;VOICE:12345
+TEL;TYPE=cell:67890
+ADR;TYPE=work:;;;
+EMAIL:clark@superman.com
+END:VCARD`;*/
+      let cadena:string = 'MATMSG:TO:josufmc@hotmail.com;SUB:Hola;BODY:Hola caraculo!;;';
+      this.historialProvider.agregarHistorial(cadena);
+      return;
     }
     
     this.scanner.scan().then((barcodeData) => {
