@@ -7,6 +7,8 @@ import { ViewController } from 'ionic-angular';
 })
 export class SubirPage {
 
+  public titulo: string = "";
+
   constructor(private viewCtrl: ViewController) {
   }
 
