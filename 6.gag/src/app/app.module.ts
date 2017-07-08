@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Camera } from '@ionic-native/camera';
 
 // Pages
 import { MyApp } from './app.component';
@@ -19,6 +20,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Config
 import { firebaseConfig } from './../config/firebase.config';
+
+// Camera
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,9 @@ import { firebaseConfig } from './../config/firebase.config';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Camera,
+    ImagePicker
   ]
 })
 export class AppModule {}
