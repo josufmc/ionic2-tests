@@ -21,6 +21,12 @@
         <img [src]="imgPreview">
     </ion-item>
 
+    <ion-buttons>
+      <button ion-button [disabled]=" img.length < 2 || titulo.length < 2 " (click)="crearPost()">
+        Crear post
+      </button>
+    </ion-buttons>
+
   </ion-list>
 
   <ion-grid>

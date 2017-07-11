@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ViewController, ToastController, Platform } from 'ionic-angular';
+import { ViewController, ToastController, Platform, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { CargaarchivoProvider } from './../../providers/cargaarchivo/cargaarchivo';
 
 @Component({
   selector: 'page-subir',
@@ -11,10 +12,11 @@ export class SubirPage {
 
   public titulo: string = "";
   public imgPreview: string = null;
-  public img: string = null;
+  public img: string = "";
 
   constructor(private viewCtrl: ViewController, private camera: Camera, private toastCtrl : ToastController,
-    private platform: Platform, private imagePicker: ImagePicker ) {
+    private platform: Platform, private imagePicker: ImagePicker, private cargaarchivoProvider: CargaarchivoProvider,
+    private loadingCtrl: LoadingController ) {
   }
 
   public cerrarModal(){
@@ -55,7 +57,7 @@ export class SubirPage {
     toast.present(); 
   }
 
-  private seleccionarFoto(){
+  public seleccionarFoto(){
     if (! this.platform.is('cordova')){
       this.mostrarToast('No estamos en un móvil');
       return;
@@ -79,6 +81,37 @@ export class SubirPage {
     });
   }
 
+
+  public crearPost(){
+    console.log('Subiendo imagen...');
+
+    let loader = this.mostrarCargando('Subiendo');
+
+    let archivo = {
+      titulo: this.titulo,
+      img: this.img
+    }
+
+    this.cargaarchivoProvider.cargarImagenesFirebase(archivo).then(
+      ()=>{
+        loader.dismiss();
+        this.cerrarModal();
+      },
+      (error) =>{
+        loader.dismiss();
+        this.mostrarToast('Error al cargar: ' + error);
+        console.log('Error al cargar: ' + JSON.stringify(error));
+      }
+    );
+  }
+
+  private mostrarCargando(msg: string){
+    let loader = this.loadingCtrl.create({
+      content: msg
+    });
+    loader.present();
+    return loader;
+  }
 
 
 }
