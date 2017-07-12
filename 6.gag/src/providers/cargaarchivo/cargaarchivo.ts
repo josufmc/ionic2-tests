@@ -11,7 +11,7 @@ export class CargaarchivoProvider {
   private POSTS: string = "post";
 
   private imagenes: any[] = [];
-  private lastKey: string = null;
+  private lastKey: string = undefined;
   
   public constructor(private af: AngularFireDatabase, private toastCtrl : ToastController){
 
@@ -19,7 +19,7 @@ export class CargaarchivoProvider {
 
   public cargarImagenesFirebase(archivo: ArchivoSubir){
     let promesa = new Promise((resolve, reject)=>{
-      this.mostrarToast('Inicio ed carga...');
+      this.mostrarToast('Inicio de carga...');
       let storageRef = firebase.storage().ref();
       // Unique name prefix
       let nombreArchivo = new Date().valueOf();
@@ -55,7 +55,7 @@ export class CargaarchivoProvider {
       titulo: titulo
     };
     // Uploading post to firebase
-    let $key = this.af.database.ref(`/${ this.POSTS }`).push(post).key;
+    let $key = this.af.list(`/${ this.POSTS }`).push(post).key;
     post.$key = $key;
     this.imagenes.push(post);
   }
@@ -66,6 +66,38 @@ export class CargaarchivoProvider {
       duration: 2500
     });
     toast.present(); 
+  }
+
+  public cargaImagenes(){
+    let promesa = new Promise((resolve, reject) => {
+      this.af.list(`/${ this.POSTS }`, {
+        query: {
+          limitToLast: 4,
+          orderByKey: true,
+          endAt: this.lastKey
+        }
+      }).subscribe(
+        posts => {
+          // La última clave, viene repetida. La quitamos
+          if (this.lastKey){
+            posts.pop();
+          }
+          if (posts.length == 0){
+            console.log('Ya no quedan registros');
+            resolve(false);
+            return;
+          }
+          this.lastKey = posts[0].$key;
+
+          for (let i = posts.length -1; i >= 0; i--){
+            let post = posts[i];
+            this.imagenes.push(post);
+          }
+          resolve(true);
+        }
+      );
+    });
+    return promesa;
   }
 
 }

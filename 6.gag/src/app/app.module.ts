@@ -24,6 +24,7 @@ import { firebaseConfig } from './../config/firebase.config';
 // Camera
 import { ImagePicker } from '@ionic-native/image-picker';
 import { CargaarchivoProvider } from '../providers/cargaarchivo/cargaarchivo';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CargaarchivoProvider } from '../providers/cargaarchivo/cargaarchivo';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     ImagePicker,
-    CargaarchivoProvider
+    CargaarchivoProvider,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}

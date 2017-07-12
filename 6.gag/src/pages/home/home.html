@@ -3,11 +3,15 @@
     <ion-title>
       8 gag
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="ingresar()">Ingresar</button>
+      <button ion-button (click)="salir()">Salir</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let post of posts | async">
+  <ion-card *ngFor="let post of cargaArchivoService.imagenes">
     <img [src]="post.img">
     <ion-card-content>
       <ion-card-title>
@@ -28,4 +32,8 @@
   <ion-fab bottom right>
     <button ion-fab color="danger" (click)="mostrarModal()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
+
+  <ion-infinite-scroll (ionInfinite)="cargarSiguientes($event)" [enabled]="hayMas">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
