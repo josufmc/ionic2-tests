@@ -15,6 +15,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { firebaseConfig } from './../config/firebase.config';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation';
+import { UbicacionProvider } from '../providers/ubicacion/ubicacion';
 
 
 
@@ -42,7 +44,9 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UsuarioProvider
+    UsuarioProvider,
+    Geolocation,
+    UbicacionProvider
   ]
 })
 export class AppModule {}
