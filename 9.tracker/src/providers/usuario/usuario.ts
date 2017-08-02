@@ -92,4 +92,9 @@ export class UsuarioProvider {
 
     return promesa;
   }
+
+  public borrarUsuario(){
+    this.clave = null;
+    this.guardarStorage();
+  }
 }

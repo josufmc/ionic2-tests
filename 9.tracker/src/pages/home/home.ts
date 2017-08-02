@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { UbicacionProvider } from '../../providers/ubicacion/ubicacion';
-
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -25,6 +25,11 @@ export class HomePage {
         console.log(error);
       }
     );
+  }
+
+  public salir(){
+    this.ubicacionService.detenerLocalizacion();
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }
