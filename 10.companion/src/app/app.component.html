@@ -5,21 +5,26 @@
 <div class="container">
   <div class="row">
       <div class="col-md-8">
-        <h1>Siguiendo a: <strong class="text-primary">persona</strong></h1>
-        ##MAPA##
+        <h1>Siguiendo a: <strong class="text-primary">{{taxistaSeleccionado.nombre}}</strong></h1>
+        
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+          <agm-marker 
+            *ngFor="let taxista of taxistas"
+            [latitude]="taxista.lat" 
+            [longitude]="taxista.lng"
+            [label]="taxista.nombre">
+          </agm-marker>
+        </agm-map>
+
       </div>
       <div class="col-md-4">
         <h1>Taxistas</h1>
         <p>Seleccione para seguir</p>
         <ul class="list-group">
-          <li class="list-group-item">Taxista 1</li>
-          <li class="list-group-item">Taxista 1</li>
-          <li class="list-group-item">Taxista 1</li>
-          <li class="list-group-item">Taxista 1</li>
-          <li class="list-group-item">Taxista 1</li>
+          <li *ngFor="let taxista of taxistas" class="list-group-item" (click)="seguirTaxista(taxista)">{{taxista.nombre}}</li>
         </ul>
         <br>
-        <button type="button" class="btn btn-primary btn-block">Dejar de seguir</button>
+        <button type="button" class="btn btn-primary btn-block" (click)="dejarSeguir()">Dejar de seguir</button>
       </div>      
   </div>
 </div>
