@@ -7,12 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>producto</ion-title>
+    <ion-title>{{item.producto}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <img [src]="item.codigo | imagen" alt="">
+  <div padding>
+    <h5>{{item.producto}}</h5>
+    <p><strong>Precio: </strong>{{item.precio_compra | currency:'USD':true }}</p>
+    <p>{{item.descripcion}}</p>
+    <p><strong>{{item.proveedor}}</strong></p>
+    <button ion-button block icon-left color="primary">
+      <ion-icon name="cart"></ion-icon>
+      Agregar al carrito
+    </button>
+  </div>
 </ion-content>

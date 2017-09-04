@@ -1,6 +1,8 @@
+import { ProductoPage } from './../producto/producto';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ProductosProvider } from '../../providers/productos/productos'
+import { ProductosProvider } from '../../providers/productos/productos';
+
 
 @Component({
   selector: 'page-home',
@@ -18,6 +20,10 @@ export class HomePage {
         infiniteScroll.complete();
       }
     );
+  }
+
+  public navegarProducto(item: any){
+    this.navCtrl.push(ProductoPage, {item: item});
   }
   
 }

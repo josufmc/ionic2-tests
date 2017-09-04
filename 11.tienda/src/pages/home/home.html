@@ -9,8 +9,8 @@
 <ion-content padding>
   <ion-grid>
     <ion-row *ngFor="let par of productosProvider.productos">
-      <ion-col *ngFor="let item of par">
-        <img src="http://localhost:8080/rest/public/img/productos/{{item.codigo}}.jpg" alt="">
+      <ion-col *ngFor="let item of par" (click)="navegarProducto(item)">
+        <img [src]="item.codigo | imagen" alt="">
         <p>
           {{item.producto}}
           <br>
