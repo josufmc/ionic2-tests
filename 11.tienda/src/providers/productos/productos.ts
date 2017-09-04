@@ -9,10 +9,12 @@ export class ProductosProvider {
 
   pagina = 0;
   public productos: any[] = [];
+  public lineas: any[] = [];
 
   constructor(public http: Http) {
-    console.log('Hello ProductosProvider Provider');
+    //console.log('Hello ProductosProvider Provider');
     this.cargar_todos();
+    this.cargar_lineas();
   }
 
   public cargar_todos(){
@@ -44,6 +46,21 @@ export class ProductosProvider {
     }
     console.log(nuevoArr);
     return nuevoArr;
+  }
+
+  public cargar_lineas(){
+    let url = URL_SERVICIOS + '/lineas';
+    this.http.get(url)
+    .map((resp) => resp.json())
+    .subscribe(
+      (data) => {
+        if(data.error){
+
+        } else {
+          this.lineas = data.lineas;
+        }
+      }
+    );
   }
 
 }

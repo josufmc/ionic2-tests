@@ -7,11 +7,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PorCategoriasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  private categoria;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PorCategoriasPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.categoria = this.navParams.get('categoria');
+    console.log(this.categoria);
   }
 
 }
